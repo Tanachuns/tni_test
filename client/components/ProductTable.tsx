@@ -27,9 +27,9 @@ export default function ProductTable({ stocks, addTocart }: Props) {
         <tr key={stock.id}>
           <th>{stock.id}</th>
           <td>{stock.item.name}</td>
-          <td>₹{stock.item.price.toFixed(2)}</td>
+          <td>{stock.item.price.toFixed(2)}</td>
           <td>{stock.amount}</td>
-          <td><button onClick={() => addTocart(2, stock.id, 1)} className="btn btn-primary btn-sm">Add to Cart</button></td>
+          <td><button onClick={() => addTocart( stock.id, 1)} className="btn btn-primary btn-sm">Add to Cart</button></td>
         </tr>
       ))}
     </tbody>
