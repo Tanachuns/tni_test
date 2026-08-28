@@ -1,6 +1,7 @@
 using erp_stock.Databases;
 using erp_stock.Interfaces;
 using erp_stock.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace erp_stock.Services;
 
@@ -35,5 +36,10 @@ public class StockService(SqliteDBContext context):IStockService
     public StockModel? CheckAmount(ItemModel item)
     {
         return context.Stocks.FirstOrDefault(s=>s.ItemId == item.Id);
+    }
+
+    public List<StockModel>? GetAll()
+    {
+        return context.Stocks.Include(s=>s.Item).ToList();
     }
 }

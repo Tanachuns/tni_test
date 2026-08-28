@@ -1,29 +1,29 @@
 'use client'
-import ProductTable from "@/components/ProductTable";
-import { Stock } from "@/types/stock";
+import CartTable from "@/components/CartTable";
+import { Cart } from "@/types/cart";
 import React, { useEffect } from "react";
 
 export default function Home() {
-  const [stock, setStock] = React.useState<Stock[]>([]);
+  const [cart, setCart] = React.useState<Cart|null>(null);
   useEffect(() => {
     
       try {
-      fetch(process.env.NEXT_PUBLIC_API_URL + "/api/stock")
+      fetch(process.env.NEXT_PUBLIC_API_URL + "/api/cart/2")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setStock(data);
+        setCart(data);
       }
     );
     }catch (error) {
       console.error("Error fetching stock data:", error);
     }
   }, []);
-  console.log(stock);
+  console.log(cart);
   return (
    <>
    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-    <ProductTable  stocks={stock}/>
+    <CartTable  cart={cart}/>
    </div>
    </>
   );

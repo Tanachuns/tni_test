@@ -19,6 +19,18 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IStockService, StockService>();
 builder.Services.AddScoped<ICartService, CartService>();
 #endregion
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "next", policy =>
+    {
+        policy.WithOrigins(
+                "http://localhost:3000"   
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();             // Optional: Allow cookies/auth headers
+    });
+});
 
 var app = builder.Build();
 
@@ -36,7 +48,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseCors("next");
 app.MapStaticAssets();
 
 app.MapControllerRoute(

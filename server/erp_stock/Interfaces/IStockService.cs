@@ -7,4 +7,5 @@ public interface IStockService
     public void Increase(ItemModel item);
     public StockModel Decrease(int?  id,int amount);
     public StockModel? CheckAmount(ItemModel  item);
+    public List<StockModel>? GetAll();
 }

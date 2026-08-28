@@ -93,6 +93,6 @@ public class CartService(SqliteDBContext context,IStockService stockService):ICa
     
     public CartModel? Get(int id)
     {
-        return context.Carts.Include(cartModel => cartModel.Carts).FirstOrDefault(c => c.Id == id);
+        return context.Carts.Include(cartModel => cartModel.Carts).ThenInclude(c=>c.Item).FirstOrDefault(c => c.Id == id);
     }
 }
