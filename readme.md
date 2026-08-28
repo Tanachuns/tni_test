@@ -2,9 +2,9 @@
 ERP Stock Management
 
 ## Features
-1. System with Stock and cart.
+1. System with Stock and cart. /
 2. Mockup Item and Stock no need to implement insert service.
-3. Item data include itemId, Name,price ect.
+3. Item data include itemId, Name,price ect./
 4. Show item data.
 5. Out Of Stock.
 6. Cart can add, increase/decrease, remove,clear and work with stock.
