@@ -1,0 +1,6 @@
+/server/erp_stock/appsettings.Development.json
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
