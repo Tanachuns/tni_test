@@ -10,7 +10,7 @@ export default function CartTable({ cart }: Props) {
   
   return (
    <div className="overflow-x-auto">
-    <div className="flex items-center justify-between"><h1 className="text-2xl font-bold">Cart Table</h1> <a href="/cart" className="link link-secondary">view stocks</a></div>
+    <div className="flex items-center justify-between"><h1 className="text-2xl font-bold">Cart Table</h1> <a href="/" className="link link-secondary">view stocks</a></div>
   <table className="table">
     {/* head */}
     <thead>

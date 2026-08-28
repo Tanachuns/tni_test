@@ -2,10 +2,11 @@ import { Stock } from '@/types/stock'
 import React from 'react'
 
 type Props = {
-  stocks: Stock[]
+  stocks: Stock[],
+  addTocart:Function
 }
 
-export default function ProductTable({ stocks }: Props) {
+export default function ProductTable({ stocks, addTocart }: Props) {
   
   return (
    <div className="overflow-x-auto">
@@ -28,7 +29,7 @@ export default function ProductTable({ stocks }: Props) {
           <td>{stock.item.name}</td>
           <td>₹{stock.item.price.toFixed(2)}</td>
           <td>{stock.amount}</td>
-          <td><button className="btn btn-primary btn-sm">Add to Cart</button></td>
+          <td><button onClick={() => addTocart(2, stock.id, 1)} className="btn btn-primary btn-sm">Add to Cart</button></td>
         </tr>
       ))}
     </tbody>
