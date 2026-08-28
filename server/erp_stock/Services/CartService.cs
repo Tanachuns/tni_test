@@ -1,22 +1,24 @@
+using erp_stock.Databases;
 using erp_stock.Interfaces;
 using erp_stock.Models;
 
 namespace erp_stock.Services;
 
-public class CartService:ICartService
+public class CartService(SqliteDBContext context):ICartService
 {
-    public void Add(ItemModel item, int amount)
+
+    public void Add(int id, ItemModel item, int amount)
     {
         throw new NotImplementedException();
     }
 
-    public void Remove(ItemModel item, int amount)
+    public void Remove(int id, ItemModel item, int amount)
     {
         throw new NotImplementedException();
     }
 
-    public List<ItemModel> Get()
+    public CartModel? Get(int id)
     {
-        throw new NotImplementedException();
+        return context.Carts.FirstOrDefault(c => c.Id == id);
     }
 }

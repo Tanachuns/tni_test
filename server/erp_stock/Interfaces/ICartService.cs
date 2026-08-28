@@ -4,7 +4,7 @@ namespace erp_stock.Interfaces;
 
 public interface ICartService
 {
-    public void Add(ItemModel  item, int amount);
-    public void Remove(ItemModel  item, int amount);
-    public List<ItemModel> Get();
+    public void Add(int id,ItemModel  item, int amount);
+    public void Remove(int id,ItemModel  item, int amount);
+    public CartModel? Get(int id);
 }
