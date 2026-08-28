@@ -6,7 +6,7 @@ public class ItemModel
     public string? Name { get; set; }
     public string? Description { get; set; }
     public decimal Price { get; set; }
-    public DateTime CreatedAt { get; set; }= DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public bool IsActive { get; set; }
 }

@@ -6,6 +6,6 @@ public class CartTransactionModel
     public int? ItemId { get; set; }
     public ItemModel? Item { get; set; }
     public int Amount { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }

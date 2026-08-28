@@ -11,8 +11,8 @@ using erp_stock.Databases;
 namespace erp_stock.Migrations
 {
     [DbContext(typeof(SqliteDBContext))]
-    [Migration("20260828035043_init")]
-    partial class init
+    [Migration("20260828040803_SeedInitialItems01")]
+    partial class SeedInitialItems01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,9 @@ namespace erp_stock.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
@@ -50,7 +52,9 @@ namespace erp_stock.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int?>("ItemId")
                         .HasColumnType("INTEGER");
@@ -74,7 +78,9 @@ namespace erp_stock.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
@@ -94,7 +100,49 @@ namespace erp_stock.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Links");
+                    b.ToTable("Items");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "Wireless Mouse",
+                            Price = 990.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "Mechanical Keyboard",
+                            Price = 2970.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "27-inch 4K Monitor",
+                            Price = 11500.00m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "Wireless Headphones",
+                            Price = 4250.00m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            Name = "USB-C Hub",
+                            Price = 1480.00m
+                        });
                 });
 
             modelBuilder.Entity("erp_stock.Models.StockModel", b =>
@@ -106,14 +154,59 @@ namespace erp_stock.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
                     b.Property<int?>("ItemId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ItemId");
 
                     b.ToTable("Stocks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amount = 50,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amount = 25,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amount = 10,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amount = 30,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Amount = 100,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ItemId = 5
+                        });
                 });
 
             modelBuilder.Entity("erp_stock.Models.CartTransactionModel", b =>
