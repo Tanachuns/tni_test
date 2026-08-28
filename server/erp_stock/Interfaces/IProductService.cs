@@ -5,5 +5,5 @@ namespace erp_stock.Interfaces;
 public interface IProductService
 {
     public List<ItemModel> All();
-    public ItemModel? Find();
+    public ItemModel? FindbyId(int id);
 }

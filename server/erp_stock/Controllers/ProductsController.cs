@@ -23,5 +23,24 @@ public class ProductsController(IConfiguration config,IProductService productSer
             return StatusCode(500,ex.Message);
         }
     }
+    
+    [HttpGet("{id}")]
+    public IActionResult Get(int id)
+    {
+        try
+        {
+            ItemModel item = productService.FindbyId(id);
+            if (item == null)
+            {
+                return BadRequest("invalid id.");
+            }
+            return Ok(item);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return StatusCode(500,ex.Message);
+        }
+    }
 
 }

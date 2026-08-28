@@ -11,8 +11,8 @@ public class ProductService(SqliteDBContext context):IProductService
         return context.Items.ToList();
     }
 
-    public ItemModel? Find()
+    public ItemModel? FindbyId(int id)
     {
-        throw new NotImplementedException();
+        return context.Items.FirstOrDefault(item=>item.Id == id);
     }
 }
