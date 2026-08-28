@@ -1,22 +1,39 @@
+using erp_stock.Databases;
 using erp_stock.Interfaces;
 using erp_stock.Models;
 
 namespace erp_stock.Services;
 
-public class StockService:IStockService
+public class StockService(SqliteDBContext context):IStockService
 {
     public void Increase(ItemModel item)
     {
-        throw new NotImplementedException();
+        
     }
 
-    public void Decrease(ItemModel item)
+    public StockModel Decrease(int? id,int amount)
     {
-        throw new NotImplementedException();
+        StockModel? stock = context.Stocks.FirstOrDefault(s=>s.ItemId == id);
+        if (stock == null)
+        {
+            throw new Exception("invalid stock");
+        }
+
+        if (stock.Amount >= amount)
+        {
+            stock.Amount -= amount;
+        }
+        else
+        {
+            throw new Exception("invalid stock");
+        }
+        stock.UpdatedAt = DateTime.UtcNow;
+        context.SaveChanges();
+        return stock;
     }
 
-    public void CheckAmount(ItemModel item)
+    public StockModel? CheckAmount(ItemModel item)
     {
-        throw new NotImplementedException();
+        return context.Stocks.FirstOrDefault(s=>s.ItemId == item.Id);
     }
 }

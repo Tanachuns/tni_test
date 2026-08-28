@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace erp_stock.Controllers;
 
 [Route("api/[controller]")]
-public class CartController(IConfiguration config,ICartService cartService,IProductService productService,IStockService stockService) : Controller
+public class StockController(IConfiguration config,ICartService cartService,IProductService productService,IStockService stockService) : Controller
 {
     [HttpGet("{id}")]
     public IActionResult GetAll(int id)
@@ -29,8 +29,7 @@ public class CartController(IConfiguration config,ICartService cartService,IProd
         }
     }
 
-    [HttpPatch]
-    [Route("/api/cart/increase")]
+    [HttpPost]
     public IActionResult Add([FromBody] CartRequestModel request)
     {
         try
@@ -59,7 +58,6 @@ public class CartController(IConfiguration config,ICartService cartService,IProd
         }
     }
     [HttpPatch]
-    [Route("/api/cart/decrease")]
     public IActionResult Remove([FromBody] CartRequestModel request)
     {
         try
@@ -75,8 +73,8 @@ public class CartController(IConfiguration config,ICartService cartService,IProd
             {
                 return BadRequest("invalid cart");
             }
-            cart = cartService.Remove(cart.Id,item, request.Amount);
-            return Ok(cart);
+            cartService.Remove(cart.Id,item, request.Amount);
+            return Ok();
         }
         catch (Exception ex)
         {
@@ -84,47 +82,4 @@ public class CartController(IConfiguration config,ICartService cartService,IProd
             return StatusCode(500,ex.Message);
         }
     }
-
-    [HttpPatch]
-    [Route("/api/cart/clear/{id}")]
-    public IActionResult Clear(int id)
-    {
-        try
-        {
-            CartModel? cart = cartService.Get(id);
-            if (cart == null)
-            {
-                return BadRequest("invalid cart");
-            }
-            cart = cartService.Clear(id);
-            return Ok(cart);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            return StatusCode(500,ex.Message);
-        }
-    }
-    
-    [HttpPost]
-    [Route("/api/cart/checkout/{id}")]
-    public IActionResult Checkout(int id)
-    {
-        try
-        {
-            CartModel? cart = cartService.Get(id);
-            if (cart == null || cart.IsCheckedOut)
-            {
-                return BadRequest("invalid cart");
-            }
-            cart = cartService.Checkout(id);
-            return Ok(cart);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            return StatusCode(500,ex.Message);
-        }
-    }
-    
 }

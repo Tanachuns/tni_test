@@ -4,7 +4,7 @@ namespace erp_stock.Interfaces;
 
 public interface IStockService
 {
-    public void Increase(ItemModel  item);
-    public void Decrease(ItemModel  item);
-    public void CheckAmount(ItemModel  item);
+    public void Increase(ItemModel item);
+    public StockModel Decrease(int?  id,int amount);
+    public StockModel? CheckAmount(ItemModel  item);
 }
