@@ -1,9 +1,21 @@
+using erp_stock.Databases;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+string connectionString = builder.Configuration.GetConnectionString("sqlite");
+
+builder.Services.AddDbContext<SqliteDBContext>(opts => {
+    opts.UseSqlite(connectionString);
+});
+
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
