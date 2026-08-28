@@ -16,6 +16,8 @@ builder.Services.AddDbContext<SqliteDBContext>(opts => {
 
 #region DI
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IStockService, StockService>();
+builder.Services.AddScoped<ICartService, CartService>();
 #endregion
 
 var app = builder.Build();

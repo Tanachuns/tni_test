@@ -1,13 +1,14 @@
+using erp_stock.Databases;
 using erp_stock.Interfaces;
 using erp_stock.Models;
 
 namespace erp_stock.Services;
 
-public class ProductService:IProductService
+public class ProductService(SqliteDBContext context):IProductService
 {
     public List<ItemModel> All()
     {
-        throw new NotImplementedException();
+        return context.Items.ToList();
     }
 
     public ItemModel? Find()
