@@ -1,4 +1,6 @@
 using erp_stock.Databases;
+using erp_stock.Interfaces;
+using erp_stock.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,9 @@ builder.Services.AddDbContext<SqliteDBContext>(opts => {
     opts.UseSqlite(connectionString);
 });
 
+#region DI
+builder.Services.AddScoped<IProductService, ProductService>();
+#endregion
 
 var app = builder.Build();
 
