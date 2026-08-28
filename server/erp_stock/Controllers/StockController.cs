@@ -11,11 +11,30 @@ namespace erp_stock.Controllers;
 public class StockController(IConfiguration config,ICartService cartService,IProductService productService,IStockService stockService) : Controller
 {
     [HttpGet()]
-    public IActionResult GetAll(int id)
+    public IActionResult GetAll()
     {
         try
         {
             List<StockModel>? stocks = stockService.GetAll();
+            if (stocks == null)
+            {
+                return BadRequest("invalid stocks");
+            }
+            return Ok(stocks);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return StatusCode(500,ex.Message);
+        }
+    }
+    
+    [HttpGet("{id}")]
+    public IActionResult GetAll(int id)
+    {
+        try
+        {
+            StockModel? stocks = stockService.Get(id);
             if (stocks == null)
             {
                 return BadRequest("invalid stocks");

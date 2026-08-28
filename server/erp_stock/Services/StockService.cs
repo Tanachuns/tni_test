@@ -42,4 +42,9 @@ public class StockService(SqliteDBContext context):IStockService
     {
         return context.Stocks.Include(s=>s.Item).ToList();
     }
+    
+    public StockModel? Get(int id)
+    {
+        return context.Stocks.Include(s => s.Item).FirstOrDefault(i => i.ItemId == id);
+    }
 }

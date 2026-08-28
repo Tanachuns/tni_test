@@ -49,8 +49,12 @@ public class CartController(IConfiguration config,ICartService cartService,IProd
             }
 
             CartModel cart = cartService.Get(request.CartId) ?? cartService.Create();
+            if (cart == null ||  cart.IsCheckedOut)
+            {
+                cart = cartService.Create();
+            }
             cartService.Add(cart.Id,item, request.Amount);
-            return Ok();
+            return Ok(cart);
         }
         catch (Exception ex)
         {
@@ -118,7 +122,13 @@ public class CartController(IConfiguration config,ICartService cartService,IProd
                 return BadRequest("invalid cart");
             }
             cart = cartService.Checkout(id);
-            return Ok(cart);
+            CartCheckoutResponseModel cartCheckoutResponseModel = new CartCheckoutResponseModel();
+            cartCheckoutResponseModel.CartId = cart.Id;
+            foreach (var cartTransactionModel in cart.Carts)
+            {
+                cartCheckoutResponseModel.Total = cartTransactionModel.Item.Price*cartTransactionModel.Amount;
+            }
+            return Ok(cartCheckoutResponseModel);
         }
         catch (Exception ex)
         {
